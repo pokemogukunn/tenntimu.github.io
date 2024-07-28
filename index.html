@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画ファイルダウンローダー</title>
+</head>
+<body>
+    <h1>動画ファイルダウンローダー</h1>
+    <p>ダウンロードしたい動画のIDを入力してください（カンマ区切りで複数可）:</p>
+    <input type="text" id="videoIDs" placeholder="例: video1ID, video2ID, video3ID">
+    <button onclick="downloadVideoFiles()">動画をダウンロード</button>
+
+    <script>
+        function downloadVideoFiles() {
+            const input = document.getElementById('videoIDs').value;
+            const videoIDs = input.split(',').map(id => id.trim());
+
+            videoIDs.forEach(id => {
+                const url = `https://sugar-conan.onrender.com/watch?v=${id}`;
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${id}.mp4`; // ファイル名を設定
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+    </script>
+</body>
+</html>
